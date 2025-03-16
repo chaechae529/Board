@@ -2,6 +2,7 @@ package board.controller;
 
 import board.BoardService;
 import board.Post;
+import board.exceptions.PostNotFoundException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,14 +20,11 @@ public class DeleteController {
         System.out.print("어떤 게시물을 삭제할까요? ");
         int deleteId = Integer.parseInt(br.readLine());
 
-
-        if (boardService.findById(deleteId) == null){
-            System.out.println(deleteId + "번 게시글은 존재하지 않습니다");
-            return;
+        try {
+            boardService.delete(deleteId);
+        } catch (PostNotFoundException e) {
+            System.out.println(e.getMessage());
         }
-
-        boardService.delete(deleteId);
-
 
     }
 }
