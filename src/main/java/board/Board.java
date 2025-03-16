@@ -9,10 +9,10 @@ import java.io.InputStreamReader;
 public class Board {
 
     public static void main(String[] args) throws IOException {
-        BoardService boardService = new BoardService();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        CommandHandler commandHandler = new CommandHandler(boardService, br);
-        commandHandler.start();
+//        BoardService boardService = new BoardService();
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//
+//        CommandHandler commandHandler = new CommandHandler(boardService, br);
+//        commandHandler.start();
     }
 }

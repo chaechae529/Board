@@ -1,16 +1,16 @@
 package board.controller;
 
-import board.BoardService;
+import board.service.PostService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CreateController {
-    private BoardService boardService;
+    private PostService postService;
 
-    public CreateController(BoardService boardService) {
-        this.boardService = boardService;
+    public CreateController(PostService postService) {
+        this.postService = postService;
     }
 
     public void createPost() throws IOException {
@@ -20,6 +20,6 @@ public class CreateController {
         System.out.print("내용을 입력하세요: ");
         String content = br.readLine();
 
-        boardService.create(title, content);
+        postService.createPost(title, content);
     }
 }

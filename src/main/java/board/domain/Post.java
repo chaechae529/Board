@@ -1,14 +1,13 @@
-package board;
+package board.domain;
 
 public class Post {
-    public String title;
-    public String content;
-    public int id;
+    private String title;
+    private String content;
+    private int id;
 
-    public Post(String title, String content, int id) {
+    public Post(String title, String content) {
         this.title = title;
         this.content = content;
-        this.id = id;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package board.controller;
 
-import board.BoardService;
-import board.Post;
+import board.service.PostService;
 import board.exceptions.PostNotFoundException;
 
 import java.io.BufferedReader;
@@ -9,10 +8,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DeleteController {
-    private BoardService boardService;
+    private PostService postService;
 
-    public DeleteController(BoardService boardService) {
-        this.boardService = boardService;
+    public DeleteController(PostService postService) {
+        this.postService = postService;
     }
 
     public void deletePost() throws IOException {
@@ -21,7 +20,7 @@ public class DeleteController {
         int deleteId = Integer.parseInt(br.readLine());
 
         try {
-            boardService.delete(deleteId);
+            postService.delete(deleteId);
         } catch (PostNotFoundException e) {
             System.out.println(e.getMessage());
         }

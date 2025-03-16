@@ -1,7 +1,7 @@
 package board.controller;
 
-import board.BoardService;
-import board.Post;
+import board.service.PostService;
+import board.domain.Post;
 import board.exceptions.PostNotFoundException;
 
 import java.io.BufferedReader;
@@ -10,10 +10,10 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class ReadController {
-    private BoardService boardService;
+    private PostService postService;
 
-    public ReadController(BoardService boardService) {
-        this.boardService = boardService;
+    public ReadController(PostService postService) {
+        this.postService = postService;
     }
 
     public void readPostbyId() throws IOException {
@@ -21,7 +21,7 @@ public class ReadController {
         System.out.print("어떤 게시물을 조회할까요? ");
         int readId = Integer.parseInt(br.readLine());
 
-        Post findPost = boardService.findById(readId)
+        Post findPost = postService.findById(readId)
                 .orElseThrow(() -> new PostNotFoundException(readId));
 
         System.out.println("제목: " + findPost.getTitle());
@@ -31,7 +31,7 @@ public class ReadController {
     }
 
     public void readPostAll()  {
-        List<Post> postList = boardService.findAll();
+        List<Post> postList = postService.findAll();
         StringBuilder sb = new StringBuilder();
 
         int cnt = postList.size();
@@ -39,6 +39,7 @@ public class ReadController {
 
         for (Post post : postList) {
 
+            sb.append("\n");
             sb.append(post.getId()).append("번 게시글").append("\n");
             sb.append("제목: ").append(post.getTitle()).append("\n");
             sb.append("내용: ").append(post.getContent()).append("\n");

@@ -1,23 +1,23 @@
 package board.controller;
 
-import board.BoardService;
+import board.service.PostService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
 public class CommandHandler {
     // 객체 변경 방지 final
-    private final BoardService boardService;
+    private final PostService postService;
     private final BufferedReader br;
 
-    public CommandHandler(BoardService boardService, BufferedReader br) {
-        this.boardService = boardService;
+    public CommandHandler(PostService postService, BufferedReader br) {
+        this.postService = postService;
         this.br = br;
     }
 
     public void start() throws IOException {
         while (true) {
-            System.out.print("명령어 > ");
+            System.out.print("a ");
             String command = br.readLine();
 
             if (command.equals("종료")) {
@@ -32,19 +32,19 @@ public class CommandHandler {
     private void handleCommand(String command) throws IOException {
         switch (command) {
             case "작성":
-                new CreateController(boardService).createPost();
+                new CreateController(postService).createPost();
                 break;
             case "조회":
-                new ReadController(boardService).readPostbyId();
+                new ReadController(postService).readPostbyId();
                 break;
             case "수정":
-                new UpdateController(boardService).updatePost();
+                new UpdateController(postService).updatePost();
                 break;
             case "삭제":
-                new DeleteController(boardService).deletePost();
+                new DeleteController(postService).deletePost();
                 break;
             case "목록":
-                new ReadController(boardService).readPostAll();
+                new ReadController(postService).readPostAll();
                 break;
             default:
                 System.out.println("존재하지 않는 명령어입니다.");

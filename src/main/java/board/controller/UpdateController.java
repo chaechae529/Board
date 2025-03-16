@@ -1,16 +1,16 @@
 package board.controller;
 
-import board.BoardService;
+import board.service.PostService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class UpdateController {
-    private BoardService boardService;
+    private PostService postService;
 
-    public UpdateController(BoardService boardService) {
-        this.boardService = boardService;
+    public UpdateController(PostService postService) {
+        this.postService = postService;
     }
 
     public void updatePost() throws IOException {
@@ -18,7 +18,7 @@ public class UpdateController {
         System.out.print("어떤 게시물을 수정할까요? ");
         int updateId = Integer.parseInt(br.readLine());
 
-        if (boardService.findById(updateId).isEmpty()){
+        if (postService.findById(updateId).isEmpty()){
             System.out.println(updateId + "번 게시글은 존재하지 않습니다");
             return;
         }
@@ -28,7 +28,7 @@ public class UpdateController {
         System.out.print("내용을 입력하세요: ");
         String content = br.readLine();
 
-        boardService.update(title, content, updateId);
+        postService.update(updateId, title, content);
 
     }
 }
