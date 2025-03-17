@@ -1,15 +1,12 @@
 package board.domain;
 
 import board.repository.MemoryPostRepository;
+import board.repository.PostRepository;
 
 public class Board {
     private int boardId;
     private String boardName;
-    private MemoryPostRepository memoryPostRepository;
-
-    public Board(String boardName) {
-        this.boardName = boardName;
-    }
+    private PostRepository postRepository;
 
     public int getBoardId() {
         return boardId;
@@ -27,11 +24,11 @@ public class Board {
         this.boardName = boardName;
     }
 
-    public MemoryPostRepository getMemoryPostRepository() {
-        return memoryPostRepository;
+    public PostRepository getPostRepository() {
+        return postRepository;
     }
 
-    public void setMemoryPostRepository(MemoryPostRepository memoryPostRepository) {
-        this.memoryPostRepository = new MemoryPostRepository();
+    public void setPostRepository(PostRepository postRepository) {
+        this.postRepository = postRepository;
     }
 }

@@ -5,11 +5,6 @@ public class Post {
     private String content;
     private int id;
 
-    public Post(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
-
     @Override
     public String toString() {
         return id + "번 게시물" + "\n"

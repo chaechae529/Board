@@ -3,43 +3,48 @@ package board.service;
 import board.domain.Post;
 import board.exceptions.PostNotFoundException;
 import board.repository.MemoryPostRepository;
+import board.repository.PostRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class PostService {
-    private MemoryPostRepository memoryPostRepository;
+    private PostRepository postRepository;
 
-    public PostService(MemoryPostRepository memoryPostRepository) {
-        this.memoryPostRepository = memoryPostRepository;
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
     }
 
     public void createPost(String title, String content) {
-        memoryPostRepository.save(new Post(title, content));
+        Post post = new Post();
+        post.setTitle(title);
+        post.setContent(content);
+        postRepository.save(post);
         System.out.println("게시글이 작성되었습니다.");
     }
 
     public Optional<Post> findById(int id) {
-        return memoryPostRepository.findById(id);
+        return postRepository.findById(id);
     }
 
     public List<Post> findAll() {
-        return memoryPostRepository.findAll();
+        return postRepository.findAll();
     }
 
     public void update(int id, String title, String content) {
-        Post post = memoryPostRepository.findById(id)
+        Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException(id));
+
         post.setTitle(title);
         post.setContent(content);
-        memoryPostRepository.update(post);
+        postRepository.update(post);
         System.out.println(id + "번 게시글이 수정되었습니다.");
     }
 
     public void delete(int id) {
-        Post post = memoryPostRepository.findById(id)
+        Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException(id));
-        memoryPostRepository.delete(post);
+        postRepository.delete(post);
         System.out.println(id + "번 게시글이 삭제되었습니다.");
     }
 

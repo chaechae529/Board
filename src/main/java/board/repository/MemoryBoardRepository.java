@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class MemoryBoardRepository implements BoardRepository{
-    private int nextId = 1;
+    private static int nextId = 1;
     private List<Board> boardList = new ArrayList<>();
     @Override
     public Board save(Board board) {
@@ -30,7 +30,9 @@ public class MemoryBoardRepository implements BoardRepository{
 
     @Override
     public void delete(Board board) {
+
         boardList.remove(board);
+
     }
 
     @Override

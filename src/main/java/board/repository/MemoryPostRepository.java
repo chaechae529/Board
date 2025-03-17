@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class MemoryPostRepository implements PostRepository {
-    private int nextId = 1;
-    private List<Post> postList = new ArrayList<>();
+    private static int nextId = 1;
+    private final List<Post> postList = new ArrayList<>();
 
     @Override
     public Post save(Post post) {
