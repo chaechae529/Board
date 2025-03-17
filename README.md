@@ -86,9 +86,10 @@
 
 </details>
 
-## 추가 요구사항
-
-1. MVC(Model-View-Controller) 패턴 적용
-   - 게시판, 게시물, 회원 기능에 MVC 패턴 적용
-   - 각 기능을 독립적으로 실행 가능하도록 설계
-
+<details>
+  <summary>추가 요구사항</summary>
+  
+  1. MVC(Model-View-Controller) 패턴 적용
+     - 게시판, 게시물, 회원 기능에 MVC 패턴 적용
+     - 각 기능을 독립적으로 실행 가능하도록 설계
+</details>
