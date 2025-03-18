@@ -4,6 +4,7 @@ import board.domain.Account;
 import board.repository.AccountRepository;
 
 import javax.security.auth.login.AccountNotFoundException;
+import java.time.format.DateTimeFormatter;
 
 public class AccountService {
     private AccountRepository accountRepository;
@@ -84,13 +85,15 @@ public class AccountService {
     public String getAccountDetail(int accountId) throws AccountNotFoundException {
         Account account = validateExistAccount(accountId);
 
+        String createdAt = account.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
         return String.format(
                 "[%d]번 회원\n계정: %s\n이메일: %s\n닉네임: %s\n가입일: %s",
                 account.getAccountId(),
                 account.getUserId(),
                 account.getEmail(),
                 account.getNickname(),
-                account.getCreatedAt()
+                createdAt
         );
     }
 }

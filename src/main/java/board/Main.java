@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, AccountNotFoundException, IllegalAccessException {
         AccountRepository accountRepository = new MemoryAccountRepository();
         BoardRepository boardRepository = new MemoryBoardRepository();
         PostRepository postRepository = new MemoryPostRepository();
@@ -34,11 +34,6 @@ public class Main {
         UrlParser urlParser = new UrlParser();
 
         UrlHandler urlHandler = new UrlHandler(postController, boardController, accountController, urlParser);
-        try {
-            urlHandler.start();
-        } catch (IOException | PostNotFoundException | BoardNotFoundException | AccountNotFoundException |
-                 IllegalAccessException e) {
-            System.out.println(e.getMessage());
-        }
+        urlHandler.start();
     }
 }

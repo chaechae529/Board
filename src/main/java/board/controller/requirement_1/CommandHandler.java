@@ -1,4 +1,4 @@
-package board.controller;
+package board.controller.requirement_1;
 
 import board.service.PostService;
 

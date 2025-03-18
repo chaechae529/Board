@@ -27,15 +27,20 @@ public class UrlHandler {
 
     public void start() throws IOException, AccountNotFoundException, IllegalAccessException {
         while (true) {
-            System.out.print("a ");
-            String url = br.readLine();
+            try {
+                System.out.print("a ");
+                String url = br.readLine();
 
-            if (url.equals("exit")) {
-                System.out.println("프로그램을 종료합니다.");
-                break;
+                if (url.equals("exit")) {
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
+                }
+
+                handleRequest(url);
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-
-            handleRequest(url);
         }
     }
 

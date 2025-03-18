@@ -38,7 +38,6 @@ public class PostService {
         post.setTitle(title);
         post.setContent(content);
         postRepository.update(post);
-        System.out.println(id + "번 게시글이 수정되었습니다.");
     }
 
     public void delete(int id) {
