@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DeleteController {
-    private PostService postService;
+    private PostService postController;
 
-    public DeleteController(PostService postService) {
-        this.postService = postService;
+    public DeleteController(PostService postController) {
+        this.postController = postController;
     }
 
     public void deletePost() throws IOException {
@@ -20,7 +20,7 @@ public class DeleteController {
         int deleteId = Integer.parseInt(br.readLine());
 
         try {
-            postService.delete(deleteId);
+            postController.delete(deleteId);
         } catch (PostNotFoundException e) {
             System.out.println(e.getMessage());
         }

@@ -7,17 +7,17 @@ import java.io.IOException;
 
 public class CommandHandler {
     // 객체 변경 방지 final
-    private final PostService postService;
+    private final PostService postController;
     private final BufferedReader br;
 
-    public CommandHandler(PostService postService, BufferedReader br) {
-        this.postService = postService;
+    public CommandHandler(PostService postController, BufferedReader br) {
+        this.postController = postController;
         this.br = br;
     }
 
     public void start() throws IOException {
         while (true) {
-            System.out.print("a ");
+            System.out.print("명령어 > ");
             String command = br.readLine();
 
             if (command.equals("종료")) {
@@ -32,19 +32,19 @@ public class CommandHandler {
     private void handleCommand(String command) throws IOException {
         switch (command) {
             case "작성":
-                new CreateController(postService).createPost();
+                new CreateController(postController).createPost();
                 break;
             case "조회":
-                new ReadController(postService).readPostbyId();
+                new ReadController(postController).readPostbyId();
                 break;
             case "수정":
-                new UpdateController(postService).updatePost();
+                new UpdateController(postController).updatePost();
                 break;
             case "삭제":
-                new DeleteController(postService).deletePost();
+                new DeleteController(postController).deletePost();
                 break;
             case "목록":
-                new ReadController(postService).readPostAll();
+                new ReadController(postController).readPostAll();
                 break;
             default:
                 System.out.println("존재하지 않는 명령어입니다.");

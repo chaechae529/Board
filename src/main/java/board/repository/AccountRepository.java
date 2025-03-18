@@ -21,7 +21,7 @@ public interface AccountRepository {
 
     Optional<Account> findLoggedInAccount();
 
-    void setLoggedInAccount(Account account);
+    void signinAccount(Account account);
 
-    void clearLoggedInAccount();
+    void signoutAccount();
 }

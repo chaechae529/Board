@@ -2,9 +2,9 @@ package board.service;
 
 import board.domain.Post;
 import board.exceptions.PostNotFoundException;
-import board.repository.MemoryPostRepository;
 import board.repository.PostRepository;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +15,12 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public void createPost(String title, String content) {
+    public void createPost(int boardId, String title, String content) {
         Post post = new Post();
+        post.setId(boardId);
         post.setTitle(title);
         post.setContent(content);
         postRepository.save(post);
-        System.out.println("게시글이 작성되었습니다.");
     }
 
     public Optional<Post> findById(int id) {
@@ -45,7 +45,24 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException(id));
         postRepository.delete(post);
-        System.out.println(id + "번 게시글이 삭제되었습니다.");
+
+    }
+
+    public String getPostDetail(int postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new PostNotFoundException(postId));
+
+        String createdAt = post.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String updatedAt = post.getUpdatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+        return String.format(
+                "[%d]번 게시글\n작성일: %s\n수정일: %s\n제목: %s\n내용: %s",
+                post.getId(),
+                createdAt,
+                updatedAt,
+                post.getTitle(),
+                post.getContent()
+        );
     }
 
     //    private List<Post> postsList = new ArrayList<>();

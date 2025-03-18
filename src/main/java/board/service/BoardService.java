@@ -1,13 +1,10 @@
 package board.service;
 
-import board.domain.Account;
 import board.domain.Board;
 import board.domain.Post;
 import board.exceptions.BoardNotFoundException;
 import board.repository.BoardRepository;
-import board.repository.MemoryBoardRepository;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 
 public class BoardService {
@@ -21,7 +18,6 @@ public class BoardService {
         Board board = new Board();
         board.setBoardName(boardName);
         boardRepository.save(board);
-        System.out.println("게시판이 생성되었습니다.");
     }
 
     private Board validateExistAccount(int boardId) throws BoardNotFoundException {
@@ -34,14 +30,12 @@ public class BoardService {
         board.setBoardName(boardName);
         boardRepository.update(board);
 
-        System.out.println("게시판이 수정되었습니다.");
     }
 
     public void delete(int boardId) {
         Board board = validateExistAccount(boardId);
         boardRepository.delete(board);
 
-        System.out.println("게시판이 삭제되었습니다.");
     }
 
     public List<Post> findByName(String boardName) {
@@ -49,4 +43,18 @@ public class BoardService {
                 .orElseThrow(() -> new BoardNotFoundException(boardName + " 게시판은 존재하지 않습니다."));
         return board.getPostRepository().findAll();
     }
+
+    public String getBoardDetail(String boardName) {
+        List<Post> postList = findByName(boardName);
+        StringBuilder sb = new StringBuilder();
+
+        for (Post post : postList) {
+            sb.append(post.getId()).append(" / ")
+                    .append(post.getTitle()).append(" / ").append(post.getContent());
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
 }

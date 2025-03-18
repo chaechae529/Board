@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class UpdateController {
-    private PostService postService;
+    private PostService postController;
 
-    public UpdateController(PostService postService) {
-        this.postService = postService;
+    public UpdateController(PostService postController) {
+        this.postController = postController;
     }
 
     public void updatePost() throws IOException {
@@ -18,7 +18,7 @@ public class UpdateController {
         System.out.print("어떤 게시물을 수정할까요? ");
         int updateId = Integer.parseInt(br.readLine());
 
-        if (postService.findById(updateId).isEmpty()){
+        if (postController.findById(updateId).isEmpty()){
             System.out.println(updateId + "번 게시글은 존재하지 않습니다");
             return;
         }
@@ -28,7 +28,7 @@ public class UpdateController {
         System.out.print("내용을 입력하세요: ");
         String content = br.readLine();
 
-        postService.update(updateId, title, content);
+        postController.update(updateId, title, content);
 
     }
 }

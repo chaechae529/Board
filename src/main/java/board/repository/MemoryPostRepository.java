@@ -2,6 +2,7 @@ package board.repository;
 
 import board.domain.Post;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ public class MemoryPostRepository implements PostRepository {
     @Override
     public Post save(Post post) {
         post.setId(nextId++);
+        post.setCreatedAt(LocalDateTime.now());
         postList.add(post);
         return post;
     }
@@ -40,6 +42,7 @@ public class MemoryPostRepository implements PostRepository {
         findById(post.getId()).ifPresent(existingPost -> {
             existingPost.setTitle(post.getTitle());
             existingPost.setContent(post.getContent());
+            existingPost.setUpdatedAt(LocalDateTime.now());
         });
     }
 }

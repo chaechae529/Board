@@ -10,10 +10,10 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class ReadController {
-    private PostService postService;
+    private PostService postController;
 
-    public ReadController(PostService postService) {
-        this.postService = postService;
+    public ReadController(PostService postController) {
+        this.postController = postController;
     }
 
     public void readPostbyId() throws IOException {
@@ -21,7 +21,7 @@ public class ReadController {
         System.out.print("어떤 게시물을 조회할까요? ");
         int readId = Integer.parseInt(br.readLine());
 
-        Post findPost = postService.findById(readId)
+        Post findPost = postController.findById(readId)
                 .orElseThrow(() -> new PostNotFoundException(readId));
 
         System.out.println("제목: " + findPost.getTitle());
@@ -31,7 +31,7 @@ public class ReadController {
     }
 
     public void readPostAll()  {
-        List<Post> postList = postService.findAll();
+        List<Post> postList = postController.findAll();
         StringBuilder sb = new StringBuilder();
 
         int cnt = postList.size();

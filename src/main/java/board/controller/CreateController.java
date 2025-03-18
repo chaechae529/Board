@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CreateController {
-    private PostService postService;
+    private PostService postController;
 
-    public CreateController(PostService postService) {
-        this.postService = postService;
+    public CreateController(PostService postController) {
+        this.postController = postController;
     }
 
     public void createPost() throws IOException {
@@ -20,6 +20,6 @@ public class CreateController {
         System.out.print("내용을 입력하세요: ");
         String content = br.readLine();
 
-        postService.createPost(title, content);
+//        postController.createPost(title, content);
     }
 }
